@@ -8,9 +8,9 @@ import 'package:to_do_app/model/to_do_model.dart';
 import 'package:to_do_app/provider/date_time_provider.dart';
 import 'package:to_do_app/provider/radio_provider.dart';
 import 'package:to_do_app/provider/service_provider.dart';
-import 'package:to_do_app/widget/date_time_widget.dart';
-import 'package:to_do_app/widget/radio_widget.dart';
-import 'package:to_do_app/widget/text_field_widget.dart';
+import 'package:to_do_app/view/main/widget/date_time_widget.dart';
+import 'package:to_do_app/view/main/widget/radio_widget.dart';
+import 'package:to_do_app/view/main/widget/text_field_widget.dart';
 
 class AddNewTaskModel extends StatefulWidget {
   const AddNewTaskModel({super.key});
@@ -35,6 +35,8 @@ class _AddNewTaskModelState extends State<AddNewTaskModel> {
     return Consumer(
       builder: (context, ref, child) {
         final dateProvider = ref.watch(dateTimeProvider);
+        final user = ref.watch(authStateProvider).asData?.value;
+
         return Container(
           padding: const EdgeInsets.all(30),
           height: MediaQuery.of(context).size.height * 0.80,
@@ -194,34 +196,45 @@ class _AddNewTaskModelState extends State<AddNewTaskModel> {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 14)),
                       onPressed: () {
-                        final getRadioValue = ref.read(radioProvider);
-                        String category = '';
+                        if (user != null) {
+                          final getRadioValue = ref.read(radioProvider);
+                          String category = '';
 
-                        switch (getRadioValue) {
-                          case 1:
-                            category = "Learning";
-                            break;
-                          case 2:
-                            category = "Working";
-                            break;
-                          case 3:
-                            category = "Funny";
-                            break;
+                          switch (getRadioValue) {
+                            case 1:
+                              category = "Learning";
+                              break;
+                            case 2:
+                              category = "Working";
+                              break;
+                            case 3:
+                              category = "Funny";
+                              break;
+                          }
+                          ref.read(serviceProvider).addNewTask(
+                                ToDoModel(
+                                  taskId: '',
+                                  uid: user.uid,
+                                  email: user.email,
+                                  titleTask: titleController.text,
+                                  description: descriptionController.text,
+                                  category: category,
+                                  dateTask: ref.read(dateTimeProvider),
+                                  timeTask: ref.read(timeProvider),
+                                  isDone: false,
+                                ),
+                              );
+                          titleController.clear();
+                          descriptionController.clear();
+                          ref.read(radioProvider.notifier).update((state) => 0);
+                          Navigator.pop(context);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('User not logged in'),
+                            ),
+                          );
                         }
-                        ref.read(serviceProvider).addNewTask(
-                              ToDoModel(
-                                titleTask: titleController.text,
-                                description: descriptionController.text,
-                                category: category,
-                                dateTask: ref.read(dateTimeProvider),
-                                timeTask: ref.read(timeProvider),
-                                isDone: false,
-                              ),
-                            );
-                        titleController.clear();
-                        descriptionController.clear();
-                        ref.read(radioProvider.notifier).update((state) => 0);
-                        Navigator.pop(context);
                       },
                       child: const Text("Create"),
                     ),

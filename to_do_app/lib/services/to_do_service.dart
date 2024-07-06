@@ -1,35 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:to_do_app/model/to_do_model.dart';
 
 class ToDoService {
-  final toDoCollection = FirebaseFirestore.instance.collection('todoApp');
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  String? get currentUserId => _auth.currentUser?.uid;
-
-  void addNewTask(ToDoModel model) {
-    final uid = currentUserId;
-    if (uid != null) {
-      toDoCollection.add(model.toMap()..['userId'] = uid);
-    } else {
-      print("Error: No user logged in to add task.");
-    }
+  Future<void> addNewTask(ToDoModel task) async {
+    final docRef = await _firestore.collection('users').doc(task.uid).collection('tasks').add(task.toJson());
+    await docRef.update({'taskId': docRef.id});
   }
 
-  void updateTask(String? docID, bool? valueUpdate) {
-    final uid = currentUserId;
-    if (uid != null) {
-      toDoCollection.doc(docID).update({
-        'isDone': valueUpdate,
-      });
-    }
+  void updateTask(String uid, String taskId, bool? isDone) {
+    _firestore.collection('users').doc(uid).collection('tasks').doc(taskId).update({'isDone': isDone});
   }
 
-  void deleteTask(String? docID) {
-    final uid = currentUserId;
-    if (uid != null) {
-      toDoCollection.doc(docID).delete();
-    }
+  void deleteTask(String userId, String taskId) {
+    _firestore.collection('users').doc(userId).collection('tasks').doc(taskId).delete();
+  }
+
+  Stream<List<ToDoModel>> fetchTasks(String uid) {
+    return _firestore.collection('users').doc(uid).collection('tasks').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) => ToDoModel.fromFirestore(doc)).toList();
+    });
   }
 }

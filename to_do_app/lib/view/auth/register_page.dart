@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void signUpUser() async {
-    String res = await AuthService().signUpUser(
+    String res = await AuthMethods().signUpUser(
         email: emailController.text, password: passwordController.text);
 
     if (res == "Success") {

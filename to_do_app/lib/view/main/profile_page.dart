@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                         leading: const Icon(CupertinoIcons.delete_left_fill),
                         title: const Text("Log out"),
                         onTap: () async {
-                          await AuthService().signOut();
+                          await AuthMethods().signOut();
                           context.push(Routes.login);
                         },
                         trailing: const Icon(CupertinoIcons.forward),

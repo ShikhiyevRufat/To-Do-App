@@ -64,7 +64,7 @@ class CardToDoListWidget extends ConsumerWidget {
                             icon: const Icon(CupertinoIcons.delete),
                             onPressed: () => ref
                                 .read(serviceProvider)
-                                .deleteTask(toDoData[getIndex].docID),
+                                .deleteTask(toDoData[getIndex].uid, toDoData[getIndex].taskId),
                           ),
                           title: Text(
                             toDoData[getIndex].titleTask,
@@ -90,7 +90,7 @@ class CardToDoListWidget extends ConsumerWidget {
                               activeColor: Colors.blue,
                               onChanged: (value) => ref
                                   .read(serviceProvider)
-                                  .updateTask(toDoData[getIndex].docID, value),
+                                  .updateTask(toDoData[getIndex].uid, toDoData[getIndex].taskId, value),
                             ),
                           ),
                         ),
@@ -105,7 +105,7 @@ class CardToDoListWidget extends ConsumerWidget {
                                 children: [
                                   const Text("Today"),
                                   const Gap(12),
-                                  Text(toDoData[getIndex].timeTask)
+                                  Text(toDoData[getIndex].timeTask),
                                 ],
                               ),
                             ],

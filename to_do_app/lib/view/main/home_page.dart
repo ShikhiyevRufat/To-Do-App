@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:to_do_app/common/show_model.dart';
 import 'package:to_do_app/provider/service_provider.dart';
 import 'package:to_do_app/router/routes.dart';
-import 'package:to_do_app/widget/card_to_do_list_widget.dart';
+import 'package:to_do_app/view/main/widget/card_to_do_list_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});

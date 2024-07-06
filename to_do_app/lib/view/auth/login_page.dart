@@ -17,8 +17,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool _isHidden = true;
   bool isLoading = false;
 
@@ -28,27 +28,35 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void loginUser() async {
-    String res = await AuthService().loginUser(
-        email: emailController.text, password: passwordController.text);
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 
-    if (res == "Success") {
-      setState(() {
-        isLoading = true;
-      });
-      context.go(Routes.login);
+  void loginUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await AuthMethods().loginUser(
+        email: emailController.text, password: passwordController.text);
+    if (res == 'success') {
+      if (context.mounted) {
+        context.go(Routes.home);
+
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(context, res);
+      if (context.mounted) {
+        showSnackBar(context, res);
+      }
     }
-  }
-
-  void depose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
   }
 
   @override
@@ -117,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.bold,
                 label: "Login",
                 color: const Color.fromARGB(255, 115, 80, 255),
-                onPressed: () => context.push(Routes.home),
+                onPressed: () => loginUser(),
               ),
               SizedBox(height: 30.h),
               Row(

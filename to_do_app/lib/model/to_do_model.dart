@@ -1,16 +1,20 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ToDoModel {
-  String? docID;
+  final String taskId;
+  final String uid;
+  final String? email;
   final String titleTask;
   final String description;
   final String category;
   final String dateTask;
   final String timeTask;
   final bool isDone;
-  ToDoModel({
-    this.docID,
+
+  const ToDoModel({
+    required this.taskId,
+    this.email,
+    required this.uid,
     required this.titleTask,
     required this.description,
     required this.category,
@@ -19,40 +23,45 @@ class ToDoModel {
     required this.isDone,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'titleTask': titleTask,
-      'description': description,
-      'category': category,
-      'dateTask': dateTask,
-      'timeTask': timeTask,
-      'isDone': isDone,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'taskId': taskId,
+        'uid': uid,
+        'email': email,
+        'titleTask': titleTask,
+        'description': description,
+        'category': category,
+        'dateTask': dateTask,
+        'timeTask': timeTask,
+        'isDone': isDone,
+      };
 
-  factory ToDoModel.fromMap(Map<String, dynamic> map) {
+  static ToDoModel fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
     return ToDoModel(
-      docID: map['docID'] != null ? map['docID'] as String : null,
-      titleTask: map['titleTask'] as String,
-      description: map['description'] as String,
-      category: map['category'] as String,
-      dateTask: map['dateTask'] as String,
-      timeTask: map['timeTask'] as String,
-      isDone: map['isDone'] as bool,
+      taskId: snap.id,
+      uid: snapshot["uid"] ?? '',
+      email: snapshot['email'],
+      titleTask: snapshot['titleTask'] ?? '',
+      description: snapshot['description'] ?? '',
+      category: snapshot['category'] ?? '',
+      dateTask: snapshot['dateTask'] ?? '',
+      timeTask: snapshot['timeTask'] ?? '',
+      isDone: snapshot['isDone'] ?? false,
     );
   }
 
-  factory ToDoModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+  static ToDoModel fromFirestore(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
     return ToDoModel(
-      docID: doc.id,
-      titleTask: doc['titleTask'],
-      description: doc['description'],
-      category: doc['category'],
-      dateTask: doc['dateTask'],
-      timeTask: doc['timeTask'],
-      isDone: doc['isDone'],
+      taskId: snap.id,
+      uid: snapshot["uid"] ?? '',
+      email: snapshot['email'],
+      titleTask: snapshot['titleTask'] ?? '',
+      description: snapshot['description'] ?? '',
+      category: snapshot['category'] ?? '',
+      dateTask: snapshot['dateTask'] ?? '',
+      timeTask: snapshot['timeTask'] ?? '',
+      isDone: snapshot['isDone'] ?? false,
     );
   }
-
-  String toJson() => json.encode(toMap());
 }
