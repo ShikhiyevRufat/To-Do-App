@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:to_do_app/router/routes.dart';
+import 'package:to_do_app/core/router/routes.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -12,7 +11,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -22,11 +20,12 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        if (_auth.currentUser != null) {
-          context.pushReplacement(Routes.home);
-        } else {
-          context.pushReplacement(Routes.login);
-        }
+        context.pushReplacement(Routes.mainPage);
+        // if (_auth.currentUser != null) {
+        //   context.pushReplacement(Routes.home);
+        // } else {
+        //   context.pushReplacement(Routes.login);
+        // }
       },
     );
   }
@@ -42,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Hero(tag: "todoLogo", child: Image.asset("assets/todo.png")),
+        child: Hero(tag: "todoLogo", child: Image.asset("assets/images/todo.png")),
       ),
     );
   }

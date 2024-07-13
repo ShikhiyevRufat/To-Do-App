@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:to_do_app/router/routes.dart';
-import 'package:to_do_app/services/authentication.dart';
-import 'package:to_do_app/shared/presentation/components/buttons/app_button.dart';
-import 'package:to_do_app/shared/presentation/components/config/extensions/padding_ext.dart';
-import 'package:to_do_app/shared/presentation/components/inputs/register_field.dart';
-import 'package:to_do_app/view/auth/presentation/widget/show_message.dart';
+import 'package:to_do_app/core/router/routes.dart';
+import 'package:to_do_app/core/shared/presentation/components/buttons/app_button.dart';
+import 'package:to_do_app/core/shared/presentation/components/config/extensions/padding_ext.dart';
+import 'package:to_do_app/core/shared/presentation/components/inputs/register_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -29,20 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void signUpUser() async {
-    String res = await AuthMethods().signUpUser(
-        email: emailController.text, password: passwordController.text);
-
-    if (res == "Success") {
-      setState(() {
-        isLoading = true;
-      });
-      context.pushReplacement(Routes.home);
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      showSnackBar(context, res);
-    }
+    
   }
 
   void depose() {
@@ -65,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Hero(
                 tag: "todoLogo",
                 child: Image.asset(
-                  "assets/todo.png",
+                  "assets/images/todo.png",
                   height: 150.h,
                 ),
               ),
