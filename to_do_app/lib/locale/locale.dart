@@ -262,6 +262,48 @@ abstract class LocalizationService {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @start_task.
+  ///
+  /// In en, this message translates to:
+  /// **'It\'s time to complete the task'**
+  String get start_task;
+
+  /// No description provided for @end_task.
+  ///
+  /// In en, this message translates to:
+  /// **'Task timed out'**
+  String get end_task;
+
+  /// No description provided for @your_task.
+  ///
+  /// In en, this message translates to:
+  /// **'Your task'**
+  String get your_task;
+
+  /// No description provided for @time_is_starting_now.
+  ///
+  /// In en, this message translates to:
+  /// **'time is starting now!'**
+  String get time_is_starting_now;
+
+  /// No description provided for @time_has_ended.
+  ///
+  /// In en, this message translates to:
+  /// **'time has ended'**
+  String get time_has_ended;
+
+  /// No description provided for @full_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get full_name;
+
+  /// No description provided for @choose_avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose avatar'**
+  String get choose_avatar;
 }
 
 class _LocalizationServiceDelegate extends LocalizationsDelegate<LocalizationService> {

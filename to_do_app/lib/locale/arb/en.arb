@@ -27,5 +27,12 @@
   "select_category": "Select Category",
   "date": "Date",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "start_task": "It's time to complete the task",
+  "end_task": "Task timed out",
+  "your_task": "Your task",
+  "time_is_starting_now": "time is starting now!",
+  "time_has_ended": "time has ended",
+  "full_name": "Full name",
+  "choose_avatar": "Choose avatar"
 }

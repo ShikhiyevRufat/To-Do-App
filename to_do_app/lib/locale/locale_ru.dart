@@ -87,4 +87,25 @@ class LocalizationServiceRu extends LocalizationService {
 
   @override
   String get cancel => 'Отмена';
+
+  @override
+  String get start_task => 'Пришло время выполнить задание';
+
+  @override
+  String get end_task => 'Время ожидания задачи истекло';
+
+  @override
+  String get your_task => 'Твой';
+
+  @override
+  String get time_is_starting_now => 'задание на время начинается прямо сейчас!';
+
+  @override
+  String get time_has_ended => 'задание на время закончилось';
+
+  @override
+  String get full_name => 'Полное имя';
+
+  @override
+  String get choose_avatar => 'Выбрать аватар';
 }

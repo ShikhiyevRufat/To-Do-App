@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/shared/presentation/components/inputs/text_field.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/profile/data/provider/profile_provider.dart';
 
 class AvatarBottomSheet {
@@ -51,9 +53,9 @@ class AvatarBottomSheet {
                   const Divider(),
                   SizedBox(height: 20.h),
                   AppTextField(
-                    label: 'Full name',
+                    label: locale.full_name,
                     controller: nameController,
-                    hint: 'James Arthur',
+                    hint: 'User name',
                   ),
                   SizedBox(height: 20.h),
                   SizedBox(
@@ -84,17 +86,17 @@ class AvatarBottomSheet {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
-                            foregroundColor: const Color(0xFF806DFB),
+                            foregroundColor: context.primaryColor,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            side: const BorderSide(color: Color(0xFF806DFB)),
+                            side: BorderSide(color: context.primaryColor),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                           ),
-                          child: const Text(
-                            "Cancel",
-                            style: TextStyle(color: Colors.black),
+                          child: Text(
+                            locale.cancel,
+                            style: const TextStyle(color: Colors.black),
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -105,7 +107,7 @@ class AvatarBottomSheet {
                       Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF806DFB),
+                            backgroundColor: context.primaryColor,
                             foregroundColor: Colors.white,
                             elevation: 0,
                             shape: RoundedRectangleBorder(

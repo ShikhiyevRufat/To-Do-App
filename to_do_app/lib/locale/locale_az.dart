@@ -87,4 +87,25 @@ class LocalizationServiceAz extends LocalizationService {
 
   @override
   String get cancel => 'Ləğv et';
+
+  @override
+  String get start_task => 'Tapşırıqı etmək vaxtıdır';
+
+  @override
+  String get end_task => 'Tapşırıq vaxtı sona çatdı';
+
+  @override
+  String get your_task => 'Sənin';
+
+  @override
+  String get time_is_starting_now => 'tapşırıqının vaxtı başladı';
+
+  @override
+  String get time_has_ended => 'tapşırıqının vaxtı bitdi';
+
+  @override
+  String get full_name => 'Tam ad';
+
+  @override
+  String get choose_avatar => 'Avatar seç';
 }

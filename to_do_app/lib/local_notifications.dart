@@ -11,7 +11,7 @@ class LocalNotifications {
 
   static Future<void> init() async {
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings("@mipmap/ic_launcher");
+        AndroidInitializationSettings("@mipmap/splash");
 
     const DarwinInitializationSettings iosInitalizationSettings =
         DarwinInitializationSettings();
@@ -45,16 +45,23 @@ class LocalNotifications {
   }
 
   static Future<void> scheduleNotification(
-      String title, String body, DateTime scheduledData) async {
+      String title, String body, DateTime scheduledData, int id) async {
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails("channel_Id", "channel_Name",
           importance: Importance.high, priority: Priority.high),
       iOS: DarwinNotificationDetails(),
     );
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(0, title, body,
-        tz.TZDateTime.from(scheduledData, tz.local), platformChannelSpecifics,
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+  print('Scheduling notification "$title" for $scheduledData');
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.from(scheduledData, tz.local),
+      platformChannelSpecifics,
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
   }
 }

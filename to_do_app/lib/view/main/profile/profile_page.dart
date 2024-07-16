@@ -68,8 +68,8 @@ class ProfilePage extends ConsumerWidget {
                   InkWell(
                     onTap: () => AvatarBottomSheet(
                       avatars: avatarImages,
-                      name: "Choose avatar",
-                      btnName: "Save",
+                      name: locale.choose_avatar,
+                      btnName: locale.save,
                       onBtnFunc: () {},
                     ).show(context),
                     child: Text(
@@ -156,7 +156,7 @@ class ProfilePage extends ConsumerWidget {
                           return ThemeBottomSheet(
                             colors: colorImages,
                             name: locale.change_theme,
-                            btnName: "Save",
+                            btnName: locale.save,
                             onBtnFunc: () {},
                           );
                         },

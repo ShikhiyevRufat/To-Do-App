@@ -87,4 +87,25 @@ class LocalizationServiceEn extends LocalizationService {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get start_task => 'It\'s time to complete the task';
+
+  @override
+  String get end_task => 'Task timed out';
+
+  @override
+  String get your_task => 'Your task';
+
+  @override
+  String get time_is_starting_now => 'time is starting now!';
+
+  @override
+  String get time_has_ended => 'time has ended';
+
+  @override
+  String get full_name => 'Full name';
+
+  @override
+  String get choose_avatar => 'Choose avatar';
 }

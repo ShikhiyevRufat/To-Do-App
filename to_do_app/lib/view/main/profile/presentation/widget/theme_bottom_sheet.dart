@@ -68,7 +68,7 @@ class ThemeBottomSheet extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
                               color: selectedThemeIndex == index
-                                  ? Colors.blue
+                                  ? context.primaryColor
                                   : Colors.transparent,
                               width: 2.0,
                             ),

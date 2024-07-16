@@ -213,10 +213,29 @@ class _CreateTaskState extends State<CreateTask> {
                   Provider.of<TaskProvider>(context, listen: false)
                       .addTask(task);
 
-                  DateTime scheduledData =
-                      DateTime.now().add(const Duration(seconds: 5));
-                  LocalNotifications.scheduleNotification(
-                      "Salam", "Necesen", scheduledData);
+                  DateTime scheduledStartTime = DateFormat('yyyy-MM-dd HH:mm')
+                      .parse('${_dateController.text} ${_startTimeController.text}');
+                  DateTime scheduledEndTime = DateFormat('yyyy-MM-dd HH:mm')
+                      .parse('${_dateController.text} ${_endTimeController.text}');
+
+                  if (scheduledStartTime.isAfter(DateTime.now())) {
+                    await LocalNotifications.scheduleNotification(
+                      locale.start_task,
+                      "${locale.your_task} ${_nameController.text} ${locale.time_is_starting_now}",
+                      scheduledStartTime,
+                      1, 
+                    );
+                  }
+
+                  if (scheduledEndTime.isAfter(DateTime.now())) {
+                    await LocalNotifications.scheduleNotification(
+                      locale.end_task,
+                      "${locale.your_task} ${_nameController.text} ${locale.time_has_ended}",
+                      scheduledEndTime,
+                      2, 
+                    );
+                  }
+
                   Navigator.pop(context);
                 },
               ),

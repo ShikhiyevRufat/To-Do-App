@@ -27,7 +27,14 @@
   "select_category": "Kateqoriya seç",
   "date": "Tarix",
   "save": "Yadda saxla",
-  "cancel": "Ləğv et"
+  "cancel": "Ləğv et",
+  "start_task": "Tapşırıqı etmək vaxtıdır",
+  "end_task": "Tapşırıq vaxtı sona çatdı",
+  "your_task": "Sənin",
+  "time_is_starting_now": "tapşırıqının vaxtı başladı",
+  "time_has_ended": "tapşırıqının vaxtı bitdi",
+  "full_name": "Tam ad",
+  "choose_avatar": "Avatar seç"
   
 
 }
