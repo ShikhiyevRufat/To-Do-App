@@ -1,0 +1,33 @@
+{
+  "@@locale": "az",
+  "welcome_back": "Xoş gəldiniz",
+  "search": "Axtar",
+  "manage_daily_tasks": "Gündəlik tapşırıqları idarə edin",
+  "today_tasks": "Bu günün tapşırıqları",
+  "see_all": "Hamısını gör",
+  "no_tasks_for_today": "Bu gün üçün tapşırıq yoxdur",
+  "no_tasks_available": "Əlçatan tapşırıq yoxdur",
+  "start_time": "Başlama vaxtı",
+  "end_time": "Bitmə vaxtı",
+  "progress": "Tərəqqi",
+  "low": "Aşağı",
+  "medium": "Orta",
+  "high": "Yüksək",
+  "today": "Bu gün",
+  "edit_image_and_name": "Şəkil və adı redaktə edin",
+  "user_feedback": "İstifadəçi rəyi",
+  "reminders": "Xatırlatmalar",
+  "change_theme": "Mövzunu dəyişdirin",
+  "change_language": "Dili dəyişdirin",
+  "profile": "Profil",
+  "add_task": "Tapşırıq əlavə et",
+  "task_name": "Tapşırıq adı",
+  "working": "Tapşırıq...",
+  "description": "Xülasə",
+  "select_category": "Kateqoriya seç",
+  "date": "Tarix",
+  "save": "Yadda saxla",
+  "cancel": "Ləğv et"
+  
+
+}

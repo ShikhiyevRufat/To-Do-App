@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/presentation/constants/nav_bar_items.dart';
 import 'package:to_do_app/view/main/presentation/navigation_bar/nav_bar_cubit.dart';
 import 'package:to_do_app/view/main/presentation/state/nav_bar_state.dart';
@@ -50,8 +51,8 @@ class CustomNavBar extends StatelessWidget {
                       item["iconPath"]!,
                       colorFilter: ColorFilter.mode(
                         state.index == index
-                            ? const Color(0xFF806DFB)
-                            : Colors.grey,
+                            ? context.primaryColor
+                            : context.secondaryColor,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -60,7 +61,7 @@ class CustomNavBar extends StatelessWidget {
                       height: 2,
                       width: 80,
                       color: state.index == index
-                          ? const Color(0xFF806DFB)
+                          ? context.primaryColor
                           : Colors.transparent,
                     ),
                   ],

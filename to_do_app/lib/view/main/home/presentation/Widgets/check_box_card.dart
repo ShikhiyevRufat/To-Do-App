@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
+import 'package:to_do_app/locale/l10n.dart';
 
 class CheckBoxCard extends StatefulWidget {
   final String? title;
@@ -8,14 +9,20 @@ class CheckBoxCard extends StatefulWidget {
   final String? endTime;
   final bool? isChecked;
   final ValueChanged<bool?>? onChanged;
+  final Color colorBorder;
+  final Color activeColor;
+  final Color containerColor;
 
-  CheckBoxCard({
+  const CheckBoxCard({
     super.key,
     this.title,
     this.startTime,
     this.endTime,
     this.isChecked,
     this.onChanged,
+    required this.colorBorder,
+    required this.activeColor,
+    required this.containerColor,
   });
 
   @override
@@ -29,7 +36,7 @@ class _CheckBoxCardState extends State<CheckBoxCard> {
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(
-          color: const Color(0xFF806DFB),
+          color: widget.containerColor,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -61,7 +68,7 @@ class _CheckBoxCardState extends State<CheckBoxCard> {
                     Padding(
                       padding: EdgeInsets.only(left: 5.w),
                       child: Text(
-                        "${widget.startTime ?? 'Start Time'} - ${widget.endTime ?? 'End Time'}",
+                        "${widget.startTime ?? locale.start_time} - ${widget.endTime ?? locale.end_time}",
                         style:
                             TextStyles.display12.copyWith(color: Colors.grey),
                       ),
@@ -74,10 +81,10 @@ class _CheckBoxCardState extends State<CheckBoxCard> {
               scale: 1.5,
               child: Checkbox(
                 checkColor: Colors.white,
-                side: const BorderSide(
-                  color: Color(0xFF806DFB),
+                side: BorderSide(
+                  color: widget.colorBorder,
                 ),
-                activeColor: const Color(0xFF806DFB),
+                activeColor: widget.activeColor,
                 value: widget.isChecked,
                 onChanged: widget.onChanged,
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
+import 'package:to_do_app/locale/l10n.dart';
 
 class AppSearchBar extends StatelessWidget {
   const AppSearchBar({super.key});
@@ -21,7 +22,7 @@ class AppSearchBar extends StatelessWidget {
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
           hintStyle: TextStyles.display14,
-          hintText: 'Search',
+          hintText: locale.search,
           suffixIcon: const Icon(
             Icons.search,
             color: Colors.black,

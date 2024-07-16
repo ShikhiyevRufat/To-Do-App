@@ -301,10 +301,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                                         .format(currentDate) ==
                                                     DateFormat('dd-MM-yyyy')
                                                         .format(selectedDate)
-                                                ? const Color(
-                                                    0xFF806DFB)
-                                                : Colors
-                                                    .white,
+                                                ? Colors.white
+                                                : Colors.white,
                                           ),
                                         ),
                                         child: Column(

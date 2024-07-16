@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:to_do_app/app/todo.dart';
+import 'package:to_do_app/local_notifications.dart';
 import 'package:to_do_app/model/todo_model.dart';
 import 'package:userorient_flutter/userorient_flutter.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifications.init();
+  tz.initializeTimeZones();
   await Hive.initFlutter();
 
   Hive.registerAdapter(TaskAdapter());

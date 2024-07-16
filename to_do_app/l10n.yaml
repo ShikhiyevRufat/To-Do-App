@@ -1,0 +1,6 @@
+arb-dir: lib/locale/arb
+template-arb-file: en.arb
+output-localization-file: locale.dart
+output-class: LocalizationService
+output-dir: lib/locale
+synthetic-package: false

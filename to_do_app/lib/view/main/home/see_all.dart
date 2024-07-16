@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/extensions/padding_ext.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/tasks/data/provider/task_provider.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/view/main/home/presentation/Widgets/check_box_card.dart';
 
 class SeeAll extends StatelessWidget {
-  const SeeAll({Key? key}) : super(key: key);
+  const SeeAll({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class SeeAll extends StatelessWidget {
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Text(
-          "See All",
+          locale.see_all,
           style: TextStyles.heading24.copyWith(
             fontSize: 22,
           ),
@@ -39,14 +41,10 @@ class SeeAll extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/images/empty.png",
-                      height: 150.h,
-                      width: 150.w,
-                    ),
+                    Icon(Icons.hourglass_empty_rounded, size: 70, color: context.onSurfaceColor,),
                     SizedBox(height: 20.h),
                     Text(
-                      "No tasks for today!",
+                      locale.no_tasks_for_today,
                       style: TextStyles.display14.copyWith(
                         color: Colors.grey,
                       ),
@@ -70,6 +68,9 @@ class SeeAll extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: CheckBoxCard(
+                          containerColor: context.primaryColor,
+                          activeColor: context.primaryColor,
+                          colorBorder: context.primaryColor,
                           title: task.name,
                           startTime: task.startTime,
                           endTime: task.endTime,

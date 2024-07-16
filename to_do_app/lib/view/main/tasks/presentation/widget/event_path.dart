@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/theme_ext.dart';
 
 class EventPath extends StatelessWidget {
   final bool isPast;
@@ -12,10 +13,8 @@ class EventPath extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFF806DFB)),
-            color: isPast
-                ? const Color.fromARGB(255, 250, 234, 253)
-                : Colors.white,
+            border: Border.all(color: context.primaryColor),
+            color: isPast ? context.onSurfaceColor : Colors.white,
             borderRadius: BorderRadius.circular(15)),
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.only(bottom: 20),

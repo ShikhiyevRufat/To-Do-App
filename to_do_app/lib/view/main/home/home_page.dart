@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/core/router/routes.dart';
 import 'package:to_do_app/core/shared/presentation/components/buttons/task_button.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/home/presentation/Widgets/category_card.dart';
 import 'package:to_do_app/view/main/home/presentation/Widgets/check_box_card.dart';
 import 'package:to_do_app/view/main/presentation/widgets/notification_btn.dart';
@@ -47,34 +49,34 @@ class _HomePageState extends State<HomePage> {
     final taskProvider = Provider.of<TaskProvider>(context);
     final List<Widget> cards = [
       CategoryCard(
-        categoryText: "Low",
+        categoryText: locale.low,
         onTap: () {
           GoRouter.of(context).push(
             Routes.categoryPage,
-            extra: "Low",
+            extra: locale.low,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage("Low"),
+        progress: taskProvider.getCompletedTasksPercentage(locale.low),
       ),
       CategoryCard(
-        categoryText: "Medium",
+        categoryText: locale.medium,
         onTap: () {
           GoRouter.of(context).push(
             Routes.categoryPage,
-            extra: "Medium",
+            extra: locale.medium,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage("Medium"),
+        progress: taskProvider.getCompletedTasksPercentage(locale.medium),
       ),
       CategoryCard(
-        categoryText: "High",
+        categoryText: locale.high,
         onTap: () {
           GoRouter.of(context).push(
             Routes.categoryPage,
-            extra: "High",
+            extra: locale.high,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage("High"),
+        progress: taskProvider.getCompletedTasksPercentage(locale.high),
       ),
     ];
 
@@ -93,8 +95,8 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Stack(
-        children: [Scaffold(
+      child: Stack(children: [
+        Scaffold(
           backgroundColor: Colors.white,
           appBar: CustomAppBar(
             height: 120.0,
@@ -102,7 +104,8 @@ class _HomePageState extends State<HomePage> {
               surfaceTintColor: Colors.transparent,
               backgroundColor: Colors.white,
               flexibleSpace: Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 40),
+                padding:
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -110,8 +113,9 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Welcome back",
-                          style: TextStyles.display16.copyWith(color: Colors.grey),
+                          locale.welcome_back,
+                          style: TextStyles.display16
+                              .copyWith(color: context.secondaryColor),
                         ),
                         const NotificationBtn(),
                       ],
@@ -137,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(left: 20),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: const Color(0xFF806DFB),
+                          color: context.primaryColor,
                         ),
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
@@ -154,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           hintStyle: TextStyles.display14,
-                          hintText: 'Search',
+                          hintText: locale.search,
                           suffixIcon: const Icon(
                             Icons.search,
                             color: Colors.black,
@@ -167,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       children: [
                         Text(
-                          "Manage Daily tasks",
+                          locale.manage_daily_tasks,
                           style: TextStyles.display20.copyWith(
                               fontWeight: FontWeight.bold, fontSize: 24),
                         ),
@@ -191,7 +195,8 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: cards.asMap().entries.map((entry) {
                         return GestureDetector(
-                          onTap: () => setState(() => _currentIndex = entry.key),
+                          onTap: () =>
+                              setState(() => _currentIndex = entry.key),
                           child: Container(
                             width: 12.0,
                             height: 12.0,
@@ -202,12 +207,12 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(5),
-                              color:
-                                  (Theme.of(context).brightness == Brightness.dark
-                                          ? Colors.white
-                                          : const Color(0xFF806DFB))
-                                      .withOpacity(
-                                          _currentIndex == entry.key ? 0.9 : 0.4),
+                              color: (Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : context.primaryColor)
+                                  .withOpacity(
+                                      _currentIndex == entry.key ? 0.9 : 0.4),
                             ),
                           ),
                         );
@@ -222,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Today's Tasks",
+                          locale.today_tasks,
                           style: TextStyles.display18.copyWith(
                               fontWeight: FontWeight.bold, fontSize: 24),
                         ),
@@ -231,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                             InkWell(
                               onTap: () => context.push(Routes.seeAll),
                               child: Text(
-                                "See all",
+                                locale.see_all,
                                 style: TextStyles.display12.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12,
@@ -253,14 +258,14 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                  "assets/images/empty.png",
-                                  height: 100.h,
-                                  width: 100.w,
+                                Icon(
+                                  Icons.hourglass_empty_rounded,
+                                  size: 50,
+                                  color: context.onSurfaceColor,
                                 ),
                                 SizedBox(height: 20.h),
                                 Text(
-                                  "No tasks for today!",
+                                  locale.no_tasks_for_today,
                                   style: TextStyles.display14.copyWith(
                                     color: Colors.grey,
                                   ),
@@ -277,6 +282,9 @@ class _HomePageState extends State<HomePage> {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: CheckBoxCard(
+                                  containerColor: context.primaryColor,
+                                  activeColor: context.primaryColor,
+                                  colorBorder: context.primaryColor,
                                   title: task.name,
                                   startTime: task.startTime,
                                   endTime: task.endTime,

@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () => null,
+                    onTap: () {},
                     child: const Text(
                       "Forgot password?",
                       style: TextStyle(

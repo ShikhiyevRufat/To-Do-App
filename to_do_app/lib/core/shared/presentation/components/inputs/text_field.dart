@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:to_do_app/core/extensions/border_radius_ext.dart';
 import 'package:to_do_app/core/shared/presentation/components/config/extensions/font_size.dart';
 import 'package:to_do_app/core/shared/presentation/components/config/sizes.dart';
+import 'package:to_do_app/theme_ext.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
@@ -83,7 +84,7 @@ class AppTextField extends StatelessWidget {
           onTapOutside: (_) =>
               unfocusable ? FocusScope.of(context).unfocus() : null,
           keyboardType: keyboardType,
-          style: TextStyle(fontSize: size.fontSize),
+          style: TextStyle(fontSize: size.fontSize,color: Colors.black),
           initialValue: controller == null ? initialValue : null,
           onChanged: onChanged,
           decoration: InputDecoration(
@@ -113,7 +114,7 @@ class AppTextField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: border.borderRadius,
               borderSide:
-                  BorderSide(color: const Color(0xFF806DFB), width: 1.2.r),
+                  BorderSide(color: context.primaryColor, width: 1.2.r),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15.r),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:to_do_app/core/router/routes.dart';
+import 'package:to_do_app/theme_ext.dart';
 
 class TaskButton extends StatelessWidget {
   const TaskButton({super.key});
@@ -19,7 +20,7 @@ class TaskButton extends StatelessWidget {
           height: 52.w,
           width: 52.w,
           decoration: BoxDecoration(
-            color: const Color(0xFF806DFB),
+            color: context.primaryColor,
             boxShadow: [
               BoxShadow(
                 color:

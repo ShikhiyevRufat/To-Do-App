@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider_pkg;
 import 'package:to_do_app/core/extensions/padding_ext.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/core/shared/presentation/components/inputs/text_field.dart';
+import 'package:to_do_app/locale/cubit/locale.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/profile/data/provider/avatars.dart';
+import 'package:to_do_app/view/main/profile/data/provider/color_app.dart';
 import 'package:to_do_app/view/main/profile/data/provider/profile_provider.dart';
+import 'package:to_do_app/view/main/profile/presentation/widget/language_bottom_sheet.dart';
+import 'package:to_do_app/view/main/profile/presentation/widget/theme_bottom_sheet.dart';
 import 'package:to_do_app/view/main/profile/presentation/widget/avatar_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:userorient_flutter/userorient_flutter.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key});
+class ProfilePage extends ConsumerWidget {
+  const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    final avatarProvider = Provider.of<AvatarProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userProvider = provider_pkg.Provider.of<UserProvider>(context);
+    final avatarProvider = provider_pkg.Provider.of<AvatarProvider>(context);
+    final colorProvider = provider_pkg.Provider.of<ColorAppProvider>(context);
     final avatarImages = avatarProvider.getAvatars();
+    final colorImages = colorProvider.getColors();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,9 +35,9 @@ class ProfilePage extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 350,
-            decoration: const BoxDecoration(
-              color: Color(0xFFf1ebfa),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: context.onSurfaceColor,
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 bottomRight: Radius.circular(25),
               ),
@@ -38,7 +47,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Profile",
+                    locale.profile,
                     style: TextStyles.heading24.copyWith(fontSize: 22),
                   ),
                   const Spacer(),
@@ -64,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                       onBtnFunc: () {},
                     ).show(context),
                     child: Text(
-                      "Edit image and name",
+                      locale.edit_image_and_name,
                       style: TextStyles.display12.copyWith(
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
@@ -105,7 +114,7 @@ class ProfilePage extends StatelessWidget {
                     height: 5.h,
                   ),
                   AppTextField(
-                    hint: 'User feedback',
+                    hint: locale.user_feedback,
                     enabled: true,
                     trailing: Icons.favorite_border_sharp,
                     onTap: () async {
@@ -117,7 +126,7 @@ class ProfilePage extends StatelessWidget {
                     height: 5.h,
                   ),
                   AppTextField(
-                    hint: 'Reminders',
+                    hint: locale.reminders,
                     enabled: true,
                     switchBtn: Transform.scale(
                       scale: 0.8,
@@ -137,33 +146,34 @@ class ProfilePage extends StatelessWidget {
                     height: 5.h,
                   ),
                   AppTextField(
-                    hint: 'Notifications',
+                    hint: locale.change_theme,
                     enabled: true,
-                    switchBtn: Transform.scale(
-                      scale: 0.8,
-                      child: Switch(
-                        hoverColor: Colors.white,
-                        thumbColor: const WidgetStatePropertyAll(Colors.white),
-                        inactiveTrackColor: Colors.grey.shade300,
-                        trackColor:
-                            WidgetStatePropertyAll(Colors.grey.shade300),
-                        value: false,
-                        onChanged: (value) {},
-                      ),
-                    ),
+                    trailing: Icons.color_lens_outlined,
                     onTap: () {
-                      // Handle onTap
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ThemeBottomSheet(
+                            colors: colorImages,
+                            name: locale.change_theme,
+                            btnName: "Save",
+                            onBtnFunc: () {},
+                          );
+                        },
+                      );
                     },
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
                   AppTextField(
-                    hint: 'Logout',
+                    hint: locale.change_language,
                     enabled: true,
-                    trailing: Icons.keyboard_arrow_right_rounded,
+                    trailing: Icons.language,
                     onTap: () {
-                      // Handle onTap
+                      LanguageBottomSheet(
+                        localeNotifierRef: ref.read(localeProvider.notifier),
+                      ).show(context);
                     },
                   ),
                   SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/tasks/presentation/widget/event_path.dart';
 
 class TimeLineeUi extends StatelessWidget {
@@ -25,20 +26,14 @@ class TimeLineeUi extends StatelessWidget {
         isFirst: isFirst,
         isLast: isLast,
         beforeLineStyle: LineStyle(
-          color: isPast
-              ? const Color(0xFF806DFB)
-              : const Color.fromARGB(255, 250, 234, 253),
+          color: isPast ? context.primaryColor : context.onSurfaceColor,
         ),
         indicatorStyle: IndicatorStyle(
           width: 40.h,
-          color: isPast
-              ? const Color(0xFF806DFB)
-              : const Color.fromARGB(255, 250, 234, 253),
+          color: isPast ? context.primaryColor : context.onSurfaceColor,
           iconStyle: IconStyle(
             iconData: Icons.check_circle_outline,
-            color: isPast
-                ? Colors.white
-                : const Color.fromARGB(255, 250, 234, 253),
+            color: isPast ? Colors.white : context.onSurfaceColor,
           ),
         ),
         endChild: EventPath(

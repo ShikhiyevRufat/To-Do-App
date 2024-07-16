@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 
 class CategoryCard extends StatelessWidget {
   final String categoryText;
@@ -36,7 +38,7 @@ class CategoryCard extends StatelessWidget {
                     blurRadius: 5,
                   ),
                 ],
-                color: const Color(0xFFf1ebfa),
+                color: context.primaryContainerColor,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   bottomLeft: Radius.circular(15),
@@ -55,7 +57,7 @@ class CategoryCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 4.0),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(7),
                             color: Colors.white,
                           ),
                           child: Center(
@@ -86,18 +88,17 @@ class CategoryCard extends StatelessWidget {
                       child: Text(
                         "Design user interface using prototype",
                         style: TextStyles.display12.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey.shade700),
+                            fontWeight: FontWeight.w400, color: Colors.white),
                       ),
                     ),
                     SizedBox(
-                      height: 45.h,
+                      height: 35.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Progress",
+                          locale.progress,
                           style: TextStyles.display12,
                         ),
                         Text(
@@ -115,8 +116,8 @@ class CategoryCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         value: progress,
                         backgroundColor: Colors.grey[400],
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFF806DFB)),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            context.surfaceColor),
                         minHeight: 10.0,
                       ),
                     ),

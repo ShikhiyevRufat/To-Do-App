@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/core/shared/presentation/components/date/horizontal_calendar.dart';
+import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/presentation/widgets/notification_btn.dart';
 import 'package:to_do_app/view/main/tasks/presentation/widget/doing_card.dart';
 
@@ -23,7 +25,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-
 
 class TasksPage extends StatefulWidget {
   const TasksPage({super.key});
@@ -46,7 +47,7 @@ class _TasksPageState extends State<TasksPage> {
     String formattedDate = DateFormat('d MMMM yyyy').format(DateTime.now());
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         height: 120.0,
         child: AppBar(
           surfaceTintColor: Colors.transparent,
@@ -66,12 +67,11 @@ class _TasksPageState extends State<TasksPage> {
                     const NotificationBtn(),
                   ],
                 ),
-                const SizedBox(height: 8.0), 
+                const SizedBox(height: 8.0),
                 Text(
-                  "Today",
-                  style: TextStyles.display20.copyWith(
-                    fontWeight: FontWeight.bold
-                  ),
+                  locale.today,
+                  style: TextStyles.display20
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -84,16 +84,18 @@ class _TasksPageState extends State<TasksPage> {
             minDate: DateTime(2024),
             maxDate: DateTime(2030),
             initialDate: DateTime.now(),
-            activeTextColor: Colors.grey,
+            activeTextColor: context.secondaryColor,
             inactiveTextColor: Colors.grey,
-            activeBackgroundColor: const Color.fromARGB(255, 250, 234, 253),
+            activeBackgroundColor: context.onSurfaceColor,
             inactiveBackgroundColor: Colors.white,
             onDateChange: _onDateChange,
           ),
           SizedBox(
             height: 20.h,
           ),
-          Expanded(child: SingleChildScrollView(child: DoingCard(selectedDate: selectedDate))),
+          Expanded(
+              child: SingleChildScrollView(
+                  child: DoingCard(selectedDate: selectedDate),),),
         ],
       ),
     );

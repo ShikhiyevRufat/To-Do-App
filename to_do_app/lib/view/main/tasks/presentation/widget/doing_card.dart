@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/extensions/padding_ext.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
+import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/tasks/data/provider/task_provider.dart';
 import 'package:to_do_app/view/main/tasks/presentation/widget/time_linee_ui.dart';
 
@@ -27,7 +28,7 @@ class DoingCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/empty.png"),
+            Icon(Icons.hourglass_empty_rounded, color: context.onSurfaceColor, size: 100,),
             Text(
               "No tasks for today",
               style: TextStyles.display20.copyWith(color: Colors.grey),
@@ -70,16 +71,16 @@ class DoingCard extends StatelessWidget {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 10.w),
-                        child: const Icon(
-                          Icons.access_time,
-                          color: Colors.grey,
-                          size: 14,
-                        ),
+                      const Icon(
+                        Icons.access_time,
+                        color: Colors.grey,
+                        size: 14,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 5.w),

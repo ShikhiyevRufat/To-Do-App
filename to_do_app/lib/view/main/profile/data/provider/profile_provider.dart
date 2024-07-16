@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class UserProvider with ChangeNotifier {
   Image? _avatar;
+  Image? colorApp;
   String _name = "User Name";
 
   Image? get avatar => _avatar;
@@ -9,6 +10,11 @@ class UserProvider with ChangeNotifier {
 
   void updateAvatar(Image avatar) {
     _avatar = avatar;
+    notifyListeners();
+  }
+
+  void updateColor(Image color) {
+    colorApp = color;
     notifyListeners();
   }
 
