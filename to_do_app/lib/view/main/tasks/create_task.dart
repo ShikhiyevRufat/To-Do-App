@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/extensions/padding_ext.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
@@ -9,18 +10,19 @@ import 'package:to_do_app/core/shared/presentation/components/buttons/app_button
 import 'package:to_do_app/core/shared/presentation/components/inputs/text_field.dart';
 import 'package:to_do_app/local_notifications.dart';
 import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/model/task_model.dart';
 import 'package:to_do_app/theme_ext.dart';
-import 'package:to_do_app/view/main/tasks/data/model/task_model.dart';
+import 'package:to_do_app/view/main/profile/presentation/widget/reminder_switch.dart';
 import 'package:to_do_app/view/main/tasks/data/provider/task_provider.dart';
 
-class CreateTask extends StatefulWidget {
+class CreateTask extends ConsumerStatefulWidget {
   const CreateTask({super.key});
 
   @override
-  State<CreateTask> createState() => _CreateTaskState();
+  ConsumerState<CreateTask> createState() => _CreateTaskState();
 }
 
-class _CreateTaskState extends State<CreateTask> {
+class _CreateTaskState extends ConsumerState<CreateTask> {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   final TextEditingController _nameController = TextEditingController();
@@ -88,6 +90,8 @@ class _CreateTaskState extends State<CreateTask> {
 
   @override
   Widget build(BuildContext context) {
+    final isReminderOn = ref.watch(reminderSwitchProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -201,7 +205,7 @@ class _CreateTaskState extends State<CreateTask> {
                 color: context.primaryColor,
                 label: locale.save,
                 onPressed: () async {
-                  final task = Task(
+                  final task = Task.create(
                     name: _nameController.text,
                     description: _descriptionController.text,
                     category: _selectedCategory,
@@ -210,30 +214,31 @@ class _CreateTaskState extends State<CreateTask> {
                     endTime: _endTimeController.text,
                   );
 
-                  Provider.of<TaskProvider>(context, listen: false)
-                      .addTask(task);
+                  context.read<TaskProvider>().addTask(task);
 
-                  DateTime scheduledStartTime = DateFormat('yyyy-MM-dd HH:mm')
-                      .parse('${_dateController.text} ${_startTimeController.text}');
-                  DateTime scheduledEndTime = DateFormat('yyyy-MM-dd HH:mm')
-                      .parse('${_dateController.text} ${_endTimeController.text}');
+                  if (isReminderOn) {
+                    DateTime scheduledStartTime = DateFormat('yyyy-MM-dd HH:mm')
+                        .parse('${_dateController.text} ${_startTimeController.text}');
+                    DateTime scheduledEndTime = DateFormat('yyyy-MM-dd HH:mm')
+                        .parse('${_dateController.text} ${_endTimeController.text}');
 
-                  if (scheduledStartTime.isAfter(DateTime.now())) {
-                    await LocalNotifications.scheduleNotification(
-                      locale.start_task,
-                      "${locale.your_task} ${_nameController.text} ${locale.time_is_starting_now}",
-                      scheduledStartTime,
-                      1, 
-                    );
-                  }
+                    if (scheduledStartTime.isAfter(DateTime.now())) {
+                      await LocalNotifications.scheduleNotification(
+                        locale.start_task,
+                        "${locale.your_task} ${_nameController.text} ${locale.time_is_starting_now}",
+                        scheduledStartTime,
+                        1,
+                      );
+                    }
 
-                  if (scheduledEndTime.isAfter(DateTime.now())) {
-                    await LocalNotifications.scheduleNotification(
-                      locale.end_task,
-                      "${locale.your_task} ${_nameController.text} ${locale.time_has_ended}",
-                      scheduledEndTime,
-                      2, 
-                    );
+                    if (scheduledEndTime.isAfter(DateTime.now())) {
+                      await LocalNotifications.scheduleNotification(
+                        locale.end_task,
+                        "${locale.your_task} ${_nameController.text} ${locale.time_has_ended}",
+                        scheduledEndTime,
+                        2,
+                      );
+                    }
                   }
 
                   Navigator.pop(context);

@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/locale/l10n.dart';
 import 'package:to_do_app/theme_ext.dart';
+import 'package:to_do_app/view/main/home/data/category_storage_service.dart';
 
 class CategoryCard extends StatelessWidget {
   final String categoryText;
   final VoidCallback onTap;
-  final double progress;
 
-  const CategoryCard({
+  CategoryCard({
     super.key,
     required this.categoryText,
     required this.onTap,
-    required this.progress,
   });
 
   @override
   Widget build(BuildContext context) {
+    final CategoryStorageService storageService = Get.find<CategoryStorageService>();
+    double progress = storageService.getProgress(categoryText);
+
     return SizedBox(
       height: 190.h,
       child: Padding(

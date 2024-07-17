@@ -7,11 +7,12 @@ import 'package:to_do_app/core/extensions/text_style.dart';
 import 'package:to_do_app/core/router/routes.dart';
 import 'package:to_do_app/core/shared/presentation/components/buttons/task_button.dart';
 import 'package:to_do_app/locale/l10n.dart';
+import 'package:to_do_app/model/task_model.dart';
 import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/view/main/home/presentation/Widgets/category_card.dart';
 import 'package:to_do_app/view/main/home/presentation/Widgets/check_box_card.dart';
 import 'package:to_do_app/view/main/presentation/widgets/notification_btn.dart';
-import 'package:to_do_app/view/main/tasks/data/model/task_model.dart';
+import 'package:to_do_app/view/main/profile/data/provider/profile_provider.dart';
 import 'package:to_do_app/view/main/tasks/data/provider/task_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<TaskProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     final List<Widget> cards = [
       CategoryCard(
         categoryText: locale.low,
@@ -56,7 +58,6 @@ class _HomePageState extends State<HomePage> {
             extra: locale.low,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage(locale.low),
       ),
       CategoryCard(
         categoryText: locale.medium,
@@ -66,7 +67,6 @@ class _HomePageState extends State<HomePage> {
             extra: locale.medium,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage(locale.medium),
       ),
       CategoryCard(
         categoryText: locale.high,
@@ -76,7 +76,6 @@ class _HomePageState extends State<HomePage> {
             extra: locale.high,
           );
         },
-        progress: taskProvider.getCompletedTasksPercentage(locale.high),
       ),
     ];
 
@@ -122,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      "Rufat Shikhiyev👋",
+                      "${userProvider.name}👋",
                       style: TextStyles.display20,
                     ),
                   ],

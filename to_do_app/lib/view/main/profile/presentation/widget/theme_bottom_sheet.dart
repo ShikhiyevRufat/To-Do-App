@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/app_theme.dart';
 import 'package:to_do_app/core/shared/presentation/components/buttons/app_button.dart';
 import 'package:to_do_app/theme_ext.dart';
 import 'package:to_do_app/theme_provider.dart';
@@ -12,7 +11,8 @@ class ThemeBottomSheet extends StatelessWidget {
   final String btnName;
   final Function onBtnFunc;
 
-  const ThemeBottomSheet({super.key, 
+  const ThemeBottomSheet({
+    super.key,
     required this.colors,
     required this.name,
     required this.btnName,
@@ -51,8 +51,7 @@ class ThemeBottomSheet extends StatelessWidget {
                   child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: colors.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 30.0,
                     ),
@@ -101,25 +100,9 @@ class ThemeBottomSheet extends StatelessWidget {
                         color: context.surfaceColor,
                         onPressed: () {
                           if (selectedThemeIndex != null) {
-                            if (selectedThemeIndex == 0) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.blueColorScheme));
-                            } else if (selectedThemeIndex == 1) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.orangeColorScheme));
-                            } else if (selectedThemeIndex == 2) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.brownColorScheme));
-                            } else if (selectedThemeIndex == 3) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.yellowColorScheme));
-                            } else if (selectedThemeIndex == 4) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.greenColorScheme));
-                            } else if (selectedThemeIndex == 5) {
-                              context.read<ThemeProvider>().setTheme(ThemeData(
-                                  colorScheme: AppTheme.pinkColorScheme));
-                            }
+                            final themeProvider = context.read<ThemeProvider>();
+                            final themeData = themeProvider.getThemeData(selectedThemeIndex!);
+                            themeProvider.setTheme(themeData);
                           }
                           Navigator.of(context).pop();
                         },

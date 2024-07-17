@@ -12,6 +12,7 @@ import 'package:to_do_app/view/main/profile/data/provider/avatars.dart';
 import 'package:to_do_app/view/main/profile/data/provider/color_app.dart';
 import 'package:to_do_app/view/main/profile/data/provider/profile_provider.dart';
 import 'package:to_do_app/view/main/profile/presentation/widget/language_bottom_sheet.dart';
+import 'package:to_do_app/view/main/profile/presentation/widget/reminder_switch.dart';
 import 'package:to_do_app/view/main/profile/presentation/widget/theme_bottom_sheet.dart';
 import 'package:to_do_app/view/main/profile/presentation/widget/avatar_bottom_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,6 +28,7 @@ class ProfilePage extends ConsumerWidget {
     final colorProvider = provider_pkg.Provider.of<ColorAppProvider>(context);
     final avatarImages = avatarProvider.getAvatars();
     final colorImages = colorProvider.getColors();
+    bool isReminderOn = ref.watch(reminderSwitchProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,7 +69,7 @@ class ProfilePage extends ConsumerWidget {
                   const Spacer(),
                   InkWell(
                     onTap: () => AvatarBottomSheet(
-                      avatars: avatarImages,
+                      avatarPaths: avatarImages,
                       name: locale.choose_avatar,
                       btnName: locale.save,
                       onBtnFunc: () {},
@@ -134,10 +136,13 @@ class ProfilePage extends ConsumerWidget {
                         hoverColor: Colors.white,
                         thumbColor: const WidgetStatePropertyAll(Colors.white),
                         inactiveTrackColor: Colors.grey.shade300,
-                        trackColor:
-                            WidgetStatePropertyAll(Colors.grey.shade300),
-                        value: true,
-                        onChanged: (value) {},
+                        activeTrackColor: context.primaryColor,
+                        value: isReminderOn,
+                        onChanged: (value) {
+                          ref
+                              .read(reminderSwitchProvider.notifier)
+                              .toggleSwitch(value);
+                        },
                       ),
                     ),
                     onTap: () {},
@@ -176,13 +181,10 @@ class ProfilePage extends ConsumerWidget {
                       ).show(context);
                     },
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
                 ],
               ).scaffoldPadding,
             ),
-          ),
+          )
         ],
       ),
     );

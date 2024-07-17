@@ -10,21 +10,18 @@ class AvatarBottomSheet {
   final String name;
   final String btnName;
   final VoidCallback onBtnFunc;
-  final Image? currentAvatar; // New field to hold the current avatar
-
-  final List<Image> avatars;
+  final List<Image> avatarPaths;
 
   AvatarBottomSheet({
-    required this.avatars,
+    required this.avatarPaths,
     required this.name,
     required this.btnName,
     required this.onBtnFunc,
-    this.currentAvatar, 
   });
 
   Future<void> show(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final nameController = TextEditingController();
+    final nameController = TextEditingController(text: userProvider.name);
 
     return showModalBottomSheet(
       context: context,
@@ -67,13 +64,13 @@ class AvatarBottomSheet {
                         crossAxisSpacing: 15,
                         mainAxisSpacing: 15,
                       ),
-                      itemCount: avatars.length,
+                      itemCount: avatarPaths.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            userProvider.updateAvatar(avatars[index]);
+                            userProvider.updateAvatar(avatarPaths[index]);
                           },
-                          child: avatars[index],
+                          child: avatarPaths[index],
                         );
                       },
                     ),

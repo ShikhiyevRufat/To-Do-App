@@ -23,8 +23,6 @@ dependencies:
   flutter_bloc: ^8.1.6
   userorient_flutter:
     git: https://github.com/UserOrient/userorient-flutter
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   http: ^1.2.1
   carousel_slider: ^4.2.1
   timeline_tile: ^2.0.0
@@ -35,15 +33,16 @@ dependencies:
   permission_handler: ^11.3.1
   get_storage: ^2.1.1
   dio: ^5.5.0+1
-  get_it: ^7.7.0
+  shared_preferences: ^2.2.3
+  build_runner: ^2.4.11
+  uuid: ^4.4.2
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive_generator: ^2.0.1
-  build_runner: ^2.1.11
   flutter_lints: ^3.0.0
-  intl_utils: ^2.8.1  # Add this dependency
+  intl_utils: ^2.8.1  
 
 flutter:
   uses-material-design: true

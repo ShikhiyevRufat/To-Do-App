@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';

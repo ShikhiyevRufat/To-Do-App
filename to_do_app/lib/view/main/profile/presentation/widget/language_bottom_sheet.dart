@@ -6,8 +6,6 @@ import 'package:to_do_app/locale/cubit/locale.dart';
 import 'package:to_do_app/locale/l10n.dart';
 import 'package:to_do_app/theme_ext.dart';
 
-
-
 class LanguageBottomSheet {
   final LocaleNotifier localeNotifierRef;
 

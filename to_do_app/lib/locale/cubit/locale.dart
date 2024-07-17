@@ -1,15 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../l10n.dart';
+import 'package:to_do_app/view/main/profile/data/model/locale_storage.dart';
+
 
 class LocaleNotifier extends StateNotifier<Locale> {
-  LocaleNotifier() : super(LocalizationConfigs().currentLocale);
+  final LocaleStorageService _localeStorageService;
+
+  LocaleNotifier(this._localeStorageService) 
+      : super(_localeStorageService.locale);
 
   void changeLocale(Locale locale) {
     if (locale == state) {
       return;
     }
-    LocalizationConfigs().changeLocale(locale);
+    _localeStorageService.saveLocale(locale);
     state = locale;
   }
 
@@ -17,5 +22,5 @@ class LocaleNotifier extends StateNotifier<Locale> {
 }
 
 final localeProvider = StateNotifierProvider<LocaleNotifier, Locale>((ref) {
-  return LocaleNotifier();
+  return LocaleNotifier(LocaleStorageService());
 });

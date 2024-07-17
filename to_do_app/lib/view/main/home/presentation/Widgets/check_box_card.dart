@@ -7,7 +7,7 @@ class CheckBoxCard extends StatefulWidget {
   final String? title;
   final String? startTime;
   final String? endTime;
-  final bool? isChecked;
+  final bool isChecked;
   final ValueChanged<bool?>? onChanged;
   final Color colorBorder;
   final Color activeColor;
@@ -18,7 +18,7 @@ class CheckBoxCard extends StatefulWidget {
     this.title,
     this.startTime,
     this.endTime,
-    this.isChecked,
+    this.isChecked = false,
     this.onChanged,
     required this.colorBorder,
     required this.activeColor,

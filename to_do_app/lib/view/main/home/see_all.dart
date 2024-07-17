@@ -29,58 +29,60 @@ class SeeAll extends StatelessWidget {
           ),
         ),
       ),
-      body: Expanded(
-        child: taskProvider.tasks.where((task) {
-          DateTime taskDate = DateFormat('yyyy-MM-dd').parse(task.date);
-          DateTime now = DateTime.now();
-          return taskDate.year == now.year &&
-              taskDate.month == now.month &&
-              taskDate.day == now.day;
-        }).isEmpty
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.hourglass_empty_rounded, size: 70, color: context.onSurfaceColor,),
-                    SizedBox(height: 20.h),
-                    Text(
-                      locale.no_tasks_for_today,
-                      style: TextStyles.display14.copyWith(
-                        color: Colors.grey,
-                      ),
+      body: taskProvider.tasks.where((task) {
+        DateTime taskDate = DateFormat('yyyy-MM-dd').parse(task.date);
+        DateTime now = DateTime.now();
+        return taskDate.year == now.year &&
+            taskDate.month == now.month &&
+            taskDate.day == now.day;
+      }).isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.hourglass_empty_rounded, size: 70, color: context.onSurfaceColor,),
+                  SizedBox(height: 20.h),
+                  Text(
+                    locale.no_tasks_for_today,
+                    style: TextStyles.display14.copyWith(
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
-              )
-            : SingleChildScrollView(
-                child: Column(
-                  children: taskProvider.tasks.where(
-                    (task) {
-                      DateTime taskDate =
-                          DateFormat('yyyy-MM-dd').parse(task.date);
-                      DateTime now = DateTime.now();
-                      return taskDate.year == now.year &&
-                          taskDate.month == now.month &&
-                          taskDate.day == now.day;
-                    },
-                  ).map(
-                    (task) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: CheckBoxCard(
-                          containerColor: context.primaryColor,
-                          activeColor: context.primaryColor,
-                          colorBorder: context.primaryColor,
-                          title: task.name,
-                          startTime: task.startTime,
-                          endTime: task.endTime,
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ).scaffoldPadding,
+                  ),
+                ],
               ),
-      ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: taskProvider.tasks.where(
+                  (task) {
+                    DateTime taskDate =
+                        DateFormat('yyyy-MM-dd').parse(task.date);
+                    DateTime now = DateTime.now();
+                    return taskDate.year == now.year &&
+                        taskDate.month == now.month &&
+                        taskDate.day == now.day;
+                  },
+                ).map(
+                  (task) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: CheckBoxCard(
+                        containerColor: context.primaryColor,
+                        activeColor: context.primaryColor,
+                        colorBorder: context.primaryColor,
+                        title: task.name,
+                        startTime: task.startTime,
+                        endTime: task.endTime,
+                        isChecked: task.isCompleted,
+                        onChanged: (value) {
+                          taskProvider.updateTaskStatus(task);
+                        },
+                      ),
+                    );
+                  },
+                ).toList(),
+              ).scaffoldPadding,
+            ),
     );
   }
 }
