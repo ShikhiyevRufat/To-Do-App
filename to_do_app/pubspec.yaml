@@ -37,6 +37,7 @@ dependencies:
   build_runner: ^2.4.11
   uuid: ^4.4.2
   get: ^4.6.6
+  google_mobile_ads: ^5.1.0
 
 dev_dependencies:
   flutter_test:

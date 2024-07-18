@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/extensions/text_style.dart';
@@ -44,6 +45,41 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   String _searchQuery = '';
+
+  bool isBannerLoaded = false;
+  late BannerAd bannerAd;
+
+  void initilizeBannerAd() async {
+  bannerAd = BannerAd(
+    size: AdSize.banner,
+    adUnitId: "ca-app-pub-3940256099942544/6300978111", 
+    listener: BannerAdListener(
+      onAdLoaded: (ad) {
+        setState(() {
+          isBannerLoaded = true;
+        });
+        print("Ad loaded successfully.");
+      },
+      onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+        setState(() {
+          isBannerLoaded = false;
+        });
+        print("Ad failed to load: $error");
+      },
+    ),
+    request: const AdRequest(),
+  );
+
+  bannerAd.load();
+}
+
+
+  @override
+  void initState() {
+    super.initState();
+    initilizeBannerAd();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +202,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 25.h),
+                    if (isBannerLoaded)
+                      SizedBox(
+                        height: 50, 
+                        child: AdWidget(ad: bannerAd),
+                      ),
                     SizedBox(height: 25.h),
                     Column(
                       children: [

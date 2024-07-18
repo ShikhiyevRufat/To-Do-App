@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:to_do_app/app/todo.dart';
 import 'package:to_do_app/local_notifications.dart';
@@ -11,6 +12,7 @@ import 'package:userorient_flutter/userorient_flutter.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize();
   await GetStorage.init();
   Get.put(CategoryStorageService());
   Get.put(AvatarStorageService());
