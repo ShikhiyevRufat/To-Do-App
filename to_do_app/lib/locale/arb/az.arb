@@ -28,13 +28,16 @@
   "date": "Tarix",
   "save": "Yadda saxla",
   "cancel": "Ləğv et",
-  "start_task": "Tapşırıqı etmək vaxtıdır",
+  "start_task": "Tapşırığı etmək vaxtıdır",
   "end_task": "Tapşırıq vaxtı sona çatdı",
   "your_task": "Sənin",
-  "time_is_starting_now": "tapşırıqının vaxtı başladı",
-  "time_has_ended": "tapşırıqının vaxtı bitdi",
+  "time_is_starting_now": "tapşırığının vaxtı başladı",
+  "time_has_ended": "tapşırığının vaxtı bitdi",
   "full_name": "Tam ad",
-  "choose_avatar": "Avatar seç"
+  "choose_avatar": "Avatar seç",
+  "small_steps_big_dreams": "Kiçik addımlar, böyük xəyallar",
+  "stay_strong": "Güclü qalın",
+  "conquer_the_challenge": "Çətinliyə qalib gəl"
   
 
 }

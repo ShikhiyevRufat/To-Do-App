@@ -108,4 +108,13 @@ class LocalizationServiceRu extends LocalizationService {
 
   @override
   String get choose_avatar => 'Выбрать аватар';
+
+  @override
+  String get small_steps_big_dreams => 'Маленькие шаги, большие мечты';
+
+  @override
+  String get stay_strong => 'Оставайся сильным';
+
+  @override
+  String get conquer_the_challenge => 'Преодолейте вызов';
 }

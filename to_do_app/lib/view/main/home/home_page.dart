@@ -87,6 +87,8 @@ class _HomePageState extends State<HomePage> {
     final userProvider = Provider.of<UserProvider>(context);
     final List<Widget> cards = [
       CategoryCard(
+        motiveText: locale.small_steps_big_dreams,
+        categoryImg: "assets/images/low.png",
         categoryText: locale.low,
         onTap: () {
           GoRouter.of(context).push(
@@ -96,6 +98,8 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       CategoryCard(
+        motiveText: locale.stay_strong,
+        categoryImg: "assets/images/middle.png",
         categoryText: locale.medium,
         onTap: () {
           GoRouter.of(context).push(
@@ -105,6 +109,8 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       CategoryCard(
+        motiveText: locale.conquer_the_challenge,
+        categoryImg: "assets/images/high.png",
         categoryText: locale.high,
         onTap: () {
           GoRouter.of(context).push(

@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotifications {
@@ -10,6 +11,8 @@ class LocalNotifications {
   }
 
   static Future<void> init() async {
+    tz.initializeTimeZones();
+
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings("@mipmap/splash");
 
@@ -45,19 +48,19 @@ class LocalNotifications {
   }
 
   static Future<void> scheduleNotification(
-      String title, String body, DateTime scheduledData, int id) async {
+      String title, String body, DateTime scheduledDate, int id) async {
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails("channel_Id", "channel_Name",
           importance: Importance.high, priority: Priority.high),
       iOS: DarwinNotificationDetails(),
     );
 
-  print('Scheduling notification "$title" for $scheduledData');
+    print('Scheduling notification "$title" for $scheduledDate');
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       title,
       body,
-      tz.TZDateTime.from(scheduledData, tz.local),
+      tz.TZDateTime.from(scheduledDate, tz.local),
       platformChannelSpecifics,
       androidScheduleMode: AndroidScheduleMode.alarmClock,
       uiLocalNotificationDateInterpretation:

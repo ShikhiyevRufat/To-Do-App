@@ -9,16 +9,21 @@ import 'package:to_do_app/view/main/home/data/category_storage_service.dart';
 class CategoryCard extends StatelessWidget {
   final String categoryText;
   final VoidCallback onTap;
+  final String motiveText;
+  final String categoryImg;
 
   CategoryCard({
     super.key,
     required this.categoryText,
     required this.onTap,
+    required this.motiveText,
+    required this.categoryImg,
   });
 
   @override
   Widget build(BuildContext context) {
-    final CategoryStorageService storageService = Get.find<CategoryStorageService>();
+    final CategoryStorageService storageService =
+        Get.find<CategoryStorageService>();
     double progress = storageService.getProgress(categoryText);
 
     return SizedBox(
@@ -80,22 +85,23 @@ class CategoryCard extends StatelessWidget {
                       height: 20.h,
                     ),
                     Text(
-                      "UI Interface App",
-                      style: TextStyles.display16
+                      motiveText,
+                      style: TextStyles.display12
                           .copyWith(fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     Flexible(
-                      child: Text(
-                        "Design user interface using prototype",
-                        style: TextStyles.display12.copyWith(
-                            fontWeight: FontWeight.w400, color: Colors.white),
+                      child: Center(
+                        child: Image(
+                          image: AssetImage(categoryImg),
+                          height: 120,
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 35.h,
+                      height: 5.h,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,8 +125,8 @@ class CategoryCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         value: progress,
                         backgroundColor: Colors.grey[400],
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            context.surfaceColor),
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(context.surfaceColor),
                         minHeight: 10.0,
                       ),
                     ),

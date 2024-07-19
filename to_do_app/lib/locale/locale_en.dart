@@ -108,4 +108,13 @@ class LocalizationServiceEn extends LocalizationService {
 
   @override
   String get choose_avatar => 'Choose avatar';
+
+  @override
+  String get small_steps_big_dreams => 'Small Steps, Big Dreams';
+
+  @override
+  String get stay_strong => 'Stay strong';
+
+  @override
+  String get conquer_the_challenge => 'Conquer the Challenge';
 }

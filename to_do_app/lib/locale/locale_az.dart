@@ -89,7 +89,7 @@ class LocalizationServiceAz extends LocalizationService {
   String get cancel => 'Ləğv et';
 
   @override
-  String get start_task => 'Tapşırıqı etmək vaxtıdır';
+  String get start_task => 'Tapşırığı etmək vaxtıdır';
 
   @override
   String get end_task => 'Tapşırıq vaxtı sona çatdı';
@@ -98,14 +98,23 @@ class LocalizationServiceAz extends LocalizationService {
   String get your_task => 'Sənin';
 
   @override
-  String get time_is_starting_now => 'tapşırıqının vaxtı başladı';
+  String get time_is_starting_now => 'tapşırığının vaxtı başladı';
 
   @override
-  String get time_has_ended => 'tapşırıqının vaxtı bitdi';
+  String get time_has_ended => 'tapşırığının vaxtı bitdi';
 
   @override
   String get full_name => 'Tam ad';
 
   @override
   String get choose_avatar => 'Avatar seç';
+
+  @override
+  String get small_steps_big_dreams => 'Kiçik addımlar, böyük xəyallar';
+
+  @override
+  String get stay_strong => 'Güclü qalın';
+
+  @override
+  String get conquer_the_challenge => 'Çətinliyə qalib gəl';
 }

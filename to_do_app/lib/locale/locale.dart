@@ -304,6 +304,24 @@ abstract class LocalizationService {
   /// In en, this message translates to:
   /// **'Choose avatar'**
   String get choose_avatar;
+
+  /// No description provided for @small_steps_big_dreams.
+  ///
+  /// In en, this message translates to:
+  /// **'Small Steps, Big Dreams'**
+  String get small_steps_big_dreams;
+
+  /// No description provided for @stay_strong.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay strong'**
+  String get stay_strong;
+
+  /// No description provided for @conquer_the_challenge.
+  ///
+  /// In en, this message translates to:
+  /// **'Conquer the Challenge'**
+  String get conquer_the_challenge;
 }
 
 class _LocalizationServiceDelegate extends LocalizationsDelegate<LocalizationService> {
