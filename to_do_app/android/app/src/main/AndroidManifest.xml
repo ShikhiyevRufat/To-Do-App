@@ -10,7 +10,7 @@
 
 
     <application
-        android:label="to_do_app"
+        android:label="ToDo Discipline"
         android:name="${applicationName}"
         android:icon="@mipmap/splash">
 
